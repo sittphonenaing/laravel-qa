@@ -19,10 +19,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('questions','QuestionController');//use resource bcz we will update,create,delete
+//php artisan make:controller QuestionController --resource --model=Question
