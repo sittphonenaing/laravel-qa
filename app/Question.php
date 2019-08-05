@@ -14,7 +14,7 @@ class Question extends Model
     }
 
     /* 
-    This mutator will be automatically called when we attempt to set the value of the title attribute on the model:
+This mutator will be automatically called when we attempt to set the value of the title attribute on the model:
     */
     public function setTitleAttribute($value){
         $this->attributes['title']=$value;
@@ -29,6 +29,16 @@ class Question extends Model
     public function getCreatedDateAttribute()
     {
        return $this->created_at->diffForHumans();//like 1 day ago,1month ago.human readable.
+    }
+    public function getStatusAttribute()
+    {
+        if ($this->answers >0){
+            if($this->answer_best_id){
+                return "answered-accepted";
+            }
+            return "answered";
+        }
+        return "unanswered";
     }
     
 }
