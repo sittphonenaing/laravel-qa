@@ -14,7 +14,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::latest()->paginate(5);//show 5 result per page and show latest result
+        $questions = Question::with("user")->latest()->paginate(5);//show 5 result per page and show latest result..with is to include in user and reduce query.
     
         return view('questions.index',compact('questions'));
 
