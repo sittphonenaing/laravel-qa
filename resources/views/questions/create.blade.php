@@ -9,14 +9,14 @@
                     <div class="d-flex align-item-center">
                         <h3>Ask Questions</h3>
                         <div class="ml-auto">
-                        <a href="{{ route("questions.index")}}" class="btn btn-outline-secondary"> Back to all Questions</a>
+                        <a href="{{ route("questions.index") }}" class="btn btn-outline-secondary"> Back to all Questions</a>
                         </div>
                     </div>
                 
                 </div>
 
                 <div class="card-body">
-                    <form action="{{route('questions.store')}}" method="POST">
+                    <form action="{{ route('questions.store') }}" method="POST">
                         @include('questions._form',['buttonText' => "Ask question"])
                     
                     </form>
