@@ -23,7 +23,7 @@ This mutator will be automatically called when we attempt to set the value of th
 
     public function getUrlAttribute()
     {
-        return route("questions.show",$this->id);
+        return route("questions.show",$this->slug);
     }
     //accessor start with get and attriubteName and ends with Attribute
     public function getCreatedDateAttribute()
@@ -39,6 +39,11 @@ This mutator will be automatically called when we attempt to set the value of th
             return "answered";
         }
         return "unanswered";
+    }
+    public function getBodyHtmlAttribute()
+
+    {
+        return \Parsedown::instance()->text($this->body);
     }
     
 }
