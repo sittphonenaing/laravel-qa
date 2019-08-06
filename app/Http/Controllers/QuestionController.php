@@ -41,7 +41,7 @@ class QuestionController extends Controller
     public function create()
     {
         $question = new Question;
-        return view('questions.create', compact($question));//Laravel expects an array to be passed to the view helper function. Second argument in view helper function is an array that where keys are the names of the variable and the value are the contents of those variables. These variables will be available in our views to be used.
+        return view('questions.create', ['question'=>$question]);//Laravel expects an array to be passed to the view helper function. Second argument in view helper function is an array that where keys are the names of the variable and the value are the contents of those variables. These variables will be available in our views to be used.
     }
 
     /**
