@@ -82,14 +82,7 @@ class QuestionController extends Controller
      */
     public function edit(Question $question)
     {
-<<<<<<< HEAD
         $this->authorize('update',$question);//update name is taken from questionpolicy.
-=======
-        if(Gate::denies("update-question",$question)){
-
-            return abort(403,'Access denied');
-        };
->>>>>>> e021f6be703ce8538e0d060a71c26d057392e297
         return view('questions.edit',compact('question'));
     }
 
@@ -101,16 +94,8 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(AskQuestionRequest $request, Question $question)
-<<<<<<< HEAD
     {
         $this->authorize('update',$question);   //update name is taken from questionpolicy.     
-=======
-    {   
-        if(Gate::denies("update-question",$question)){
-        return abort(403,'Access denied');
-        };
-
->>>>>>> e021f6be703ce8538e0d060a71c26d057392e297
         $question->update($request->only('title','body'));
         return redirect()->route('questions.index')->with("success","Your question has been updated");
     }
@@ -122,16 +107,8 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Question $question)
-<<<<<<< HEAD
     {
         $this->authorize('delete',$question);
-=======
-    {   
-        if(Gate::denies("delete-question",$question)){
-        return abort(403,'Access denied');
-        };
-
->>>>>>> e021f6be703ce8538e0d060a71c26d057392e297
         $question->delete();
         return redirect()->route('questions.index')->with('success',"Your question has been deleted");
     }

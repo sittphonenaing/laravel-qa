@@ -32,7 +32,7 @@ This mutator will be automatically called when we attempt to set the value of th
     }
     public function getStatusAttribute()
     {
-        if ($this->answers >0){
+        if ($this->answers_count >0){
             if($this->answer_best_id){
                 return "answered-accepted";
             }
@@ -44,6 +44,10 @@ This mutator will be automatically called when we attempt to set the value of th
 
     {
         return \Parsedown::instance()->text($this->body);
+    }
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
     }
     
 }
