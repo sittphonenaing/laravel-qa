@@ -78,7 +78,7 @@ class AnswersController extends Controller
     {
         $this->authorize('delete',$answer);
         
-        $answegr->delete();
+        $answer->delete();
 
         return back()->with("success","Your answers has been remove");
     }
