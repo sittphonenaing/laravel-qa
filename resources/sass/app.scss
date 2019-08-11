@@ -61,7 +61,7 @@ form.form-delete{
             &.votes-count{
             font-size: 25px;
             }
-            &.favourite-count{
+            &.favorite-count{
             font-size: 12px;
             }
         }
@@ -73,8 +73,8 @@ form.form-delete{
            color: $gray-500;
        }
 
-       &.favourite{
-           &.favourited, &.favourited:hover{
+       &.favorite{
+           &.favorited, &.favorited:hover{
                color:$warning;
             }                  
         }

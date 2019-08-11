@@ -16510,7 +16510,7 @@ form.form-delete {
   font-size: 25px;
 }
 
-.vote-control span.favourite-count {
+.vote-control span.favorite-count {
   font-size: 12px;
 }
 
@@ -16524,8 +16524,8 @@ form.form-delete {
   color: #adb5bd;
 }
 
-.vote-control a.favourite.favourited,
-.vote-control a.favourite.favourited:hover {
+.vote-control a.favorite.favorited,
+.vote-control a.favorite.favorited:hover {
   color: #ffed4a;
 }
 
