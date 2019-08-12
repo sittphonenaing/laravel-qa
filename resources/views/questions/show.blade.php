@@ -42,6 +42,7 @@
                                 @csrf
                                 <input type="hidden" name="vote" value="-1">
                             </form>
+                            {{-- vote down button end here --}}
 
                             {{-- favorite button start here --}}
                             <a title="click to mark as favorite questions(click again to undo)" 

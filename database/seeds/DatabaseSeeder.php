@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             });//a question may have more than one answers.
         });
         //factory(App\Question,3)->create(); cant call like that bcz each user may have one or more questions
-        $this->call([VotablesTableSeeder::class])
+        
+        $this->call(VotablesTableSeeder::class);
     }
 }

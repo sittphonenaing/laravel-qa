@@ -10,7 +10,7 @@
                 <form action="{{ route('questions.answer.store',$question->id) }}" method="POST">
                         @csrf
                         <div class="form-group">
-                        <textarea class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }} " name="body" rows="7"></textarea>
+                        <textarea class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }} " name="body" rows="7" style="resize:none"></textarea>
                         
                         @if ($errors->has('body'))
                             <div class="invalid-feedback">

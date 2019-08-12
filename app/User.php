@@ -92,4 +92,26 @@ class User extends Authenticatable
        $question->save();
     }
 
+    public function voteAnswer(Answer $answer,$vote)
+    {
+        $voteAnswer= $this->voteAnswers();
+
+       //check if the question is already vote or not..if not insert new data
+       if($voteAnswer->where('votable_id',$answer->id)->exists()){
+
+            $voteAnswer->updateExistingPivot($answer,['vote' => $vote]);
+       }else {
+           $voteAnswer->attach($answer,['vote'=> $vote]);
+       };
+
+       $answer->load('votes');//refresh the votes column
+       $upVotes= (int)$answer->upVotes()->sum('vote');
+       $downVotes= (int) $answer->downVotes()->sum('vote');
+       
+       //insert total count to votes_count column
+       $answer->votes_count= $upVotes +$downVotes;
+
+       $answer->save();
+    }
+
 }
