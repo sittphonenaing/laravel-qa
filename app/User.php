@@ -74,44 +74,34 @@ class User extends Authenticatable
     {
        $voteQuestion= $this->voteQuestions();
 
-       //check if the question is already vote or not..if not insert new data
-       if($voteQuestion->where('votable_id',$question->id)->exists()){
-
-            $voteQuestion->updateExistingPivot($question,['vote' => $vote]);
-       }else {
-           $voteQuestion->attach($question,['vote'=> $vote]);
-       };
-
-       $question->load('votes');//refresh the votes column
-       $upVotes= (int)$question->upVotes()->sum('vote');
-       $downVotes= (int) $question->downVotes()->sum('vote');
-       
-       //insert total count to votes_count column
-       $question->votes_count= $upVotes +$downVotes;
-
-       $question->save();
+       $this->_vote($voteQuestion,$question,$vote);
     }
 
     public function voteAnswer(Answer $answer,$vote)
     {
         $voteAnswer= $this->voteAnswers();
 
-       //check if the question is already vote or not..if not insert new data
-       if($voteAnswer->where('votable_id',$answer->id)->exists()){
+       $this->_vote($voteAnswer ,$answer,$vote);
+    }
+    
+    private function _vote($relationship , $model ,$vote)
+    {
+        //check if the question is already vote or not..if not insert new data
+       if($relationship->where('votable_id',$model->id)->exists()){
 
-            $voteAnswer->updateExistingPivot($answer,['vote' => $vote]);
-       }else {
-           $voteAnswer->attach($answer,['vote'=> $vote]);
-       };
+        $relationship->updateExistingPivot($model,['vote' => $vote]);
+        }else {
+        $relationship->attach($model,['vote'=> $vote]);
+        };
 
-       $answer->load('votes');//refresh the votes column
-       $upVotes= (int)$answer->upVotes()->sum('vote');
-       $downVotes= (int) $answer->downVotes()->sum('vote');
-       
-       //insert total count to votes_count column
-       $answer->votes_count= $upVotes +$downVotes;
+        $model->load('votes');//refresh the votes column
+        $upVotes= (int)$model->upVotes()->sum('vote');
+        $downVotes= (int) $model->downVotes()->sum('vote');
 
-       $answer->save();
+        //insert total count to votes_count column
+        $model->votes_count= $upVotes +$downVotes;
+
+        $model->save();
     }
 
 }
