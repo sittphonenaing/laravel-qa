@@ -21,6 +21,10 @@ This mutator will be automatically called when we attempt to set the value of th
         $this->attributes['title']=$value;
         $this->attributes['slug']=str_slug($value);//my-first-title;
     }
+    // public function setBodyAttribute($value)
+    // {
+    // return  $this->attribute['body']= clean($value);
+    // }
 
     public function getUrlAttribute()
     {
@@ -44,7 +48,7 @@ This mutator will be automatically called when we attempt to set the value of th
     public function getBodyHtmlAttribute()
 
     {
-        return \Parsedown::instance()->text($this->body);
+        return clean($this->bodyHtml()); //using laravel clean purifier
     }
     public function answers()
     {
@@ -71,5 +75,16 @@ This mutator will be automatically called when we attempt to set the value of th
     {
         return $this->favorites()->count();
     }
-   
+    public function getExcerptAttribute()
+    {
+        return $this->excerpt(250);
+    }//cant call body_html inside model
+    private function bodyHtml()
+    {
+        return \Parsedown::instance()->text($this->body);
+    }
+    public function excerpt($length)
+    {
+         return str_limit(strip_tags($this->bodyHtml()),$length);
+    }
 }
