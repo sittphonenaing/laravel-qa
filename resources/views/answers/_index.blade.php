@@ -11,31 +11,12 @@
                     @foreach ($answers as $answer)
                     <div class="media">
                         <div class="d-flex flex-column vote-control">
-                            {{-- vote up button start here --}}
-                            <a title="This answer is very useful" 
-                            class="vote-up {{ Auth::guest() ? 'off' : '' }}"
-                            onclick="event.preventDefault(); document.getElementById('up-vote-answer-{{ $answer->id }}').submit()">
-                                <i class="fas fa-caret-up fa-2x"></i>
-                            </a>
-
-                            <form id="up-vote-answer-{{ $answer->id }}" action="/answer/{{ $answer->id }}/vote" method="POST" style="display:none;">
-                                @csrf
-                                <input type="hidden" name="vote" value="1">
-                            </form>
-                            {{-- vote up button end here --}}
-
-                            <span class="votes-count" >{{ $answer->votes_count }}</span>
-
-                            {{-- vote down button start here --}}
-                            <a title="This answer is not useful" class="vote-down {{ Auth::guest() ? 'off' : '' }}"
-                                onclick="event.preventDefault(); document.getElementById('down-vote-answer-{{ $answer->id }}').submit()">
-                                <i class="fas fa-caret-down fa-2x"></i>
-                            </a>
-                            <form id="down-vote-answer-{{ $answer->id }}" action="/answer/{{ $answer->id }}/vote" method="POST" style="display:none;">
-                                @csrf
-                                <input type="hidden" name="vote" value="-1">
-                            </form>
-
+                            {{-- vote button stuff start here --}}
+                            @include ('shared._vote',[
+                                'model' => $answer
+                            ])
+                            {{-- vote button stuff end here --}}
+                           
                         </div>
                         <div class="media-body">
                            {!! $answer->body_html !!}
@@ -66,17 +47,10 @@
                                <div class="col-4"></div>
                                <div class="col-4">
                                      {{-- author information after answer body at float right --}}
-                                    <div class="float-right">
-                                        <span class="text-muted">Answered {{ $answer->created_date }}</span>
-                                            <div class="media mt-2">
-                                            <a href="{{ $answer->user->url }}" class="pr-2">
-                                                    <img src="{{ $answer->user->avatar }}" >
-                                            </a>
-                                            <div class="media-body mt-1">
-                                                <a href="{{ $answer->user->url }}" >{{ $answer->user->name }}</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @include('shared._author',[
+                                        'model' =>$answer,
+                                        'label' => 'Answered'
+                                    ])
                                     {{-- author info end here --}}
                                </div>
                            </div>
