@@ -28,10 +28,8 @@
                                   <div class="col-4"></div>
                                   <div class="col-4">
                                         {{-- author information after answer body at float right --}}
-                                        @include('shared._author',[
-                                            'model'=>$question,
-                                            'label'=>'Asked'
-                                        ])
+                                       
+                                        <user-info :model="{{ $question }}" label="Asked"></user-info>
                                         
                                         {{-- author info end here --}}
                                   </div>
