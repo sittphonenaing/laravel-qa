@@ -52,7 +52,8 @@ This mutator will be automatically called when we attempt to set the value of th
     }
     public function answers()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class)->orderBy('votes_count','DESC');
+        //return answer by sorting high votes count
     }
     public function acceptBestAnswer(Answer $answer)
     {

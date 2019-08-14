@@ -17,7 +17,7 @@
 
                 <div class="card-body">
                     @include('layouts._message')
-                    @foreach($questions as $question)
+                    @forelse($questions as $question)
 
                         <div class="media">
                             <div class="d-flex flex-column counters">
@@ -69,7 +69,11 @@
                         </div>
                         <hr>
 
-                    @endforeach
+                    @empty
+                        <div class="alert alert-warning">
+                            <strong>Sorry</strong> There are no questions availabe.
+                        </div>
+                    @endforelse
                         <div class="mx-auto">
                             {{ $questions->links() }}
                             <!-- //php artisan vender:publish --tag=larvel-pagination   -->
